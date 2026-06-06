@@ -8,7 +8,13 @@ class UnionFindTest(unittest.TestCase):
         ds = UnionFind(8)
         for i in range(8):
             self.assertEqual(i, ds.find(i))
-        for x, y in [(0, 1), (4, 5), (0, 4), (5, 7), (2, 3)]:
+        for x, y in [
+            (0, 1),
+            (4, 5),
+            (0, 4),
+            (5, 7),
+            (2, 3),
+        ]:
             ds.union(x, y)
         for x in [0, 1, 4, 5, 7]:
             self.assertEqual(ds.find(0), ds.find(x))

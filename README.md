@@ -17,6 +17,11 @@ A collection of algorithms and data structures short enough to fit on an A6 inde
 Requires Python 3.12+ and [uv](https://docs.astral.sh/uv/).
 Run the test suite with `uv run pytest`.
 
+## Formatting and linting
+
+Format the code with `uv run ruff format`.
+Check style with `uv run ruff check` (add `--fix` to auto-fix).
+
 ## Naming conventions
 
 Variable names are terse for brevity.
