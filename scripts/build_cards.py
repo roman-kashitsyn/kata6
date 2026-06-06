@@ -41,15 +41,14 @@ TYPST_ASSETS: dict[tuple[str, str], tuple[str, str]] = {
     ),
 }
 
+DOWNLOAD_TIMEOUT_S = 60
+
+
 def find_repo_root() -> Path:
     for p in [Path.cwd().resolve(), *Path.cwd().resolve().parents]:
         if (p / "cards.typ").exists() and (p / "src").is_dir():
             return p
     sys.exit("could not find cards.typ and src/ — run from the kata6 repo")
-
-
-REPO_ROOT = find_repo_root()
-BIN_ROOT = REPO_ROOT / ".bin" / f"typst-{TYPST_VERSION}"
 
 
 def asset_for_host() -> tuple[str, str]:
@@ -65,7 +64,10 @@ def download_and_verify(url: str, expected_sha: str, dest: Path) -> None:
     print(f"  fetching {url}", file=sys.stderr)
     dest.parent.mkdir(parents=True, exist_ok=True)
     sha = hashlib.sha256()
-    with urllib.request.urlopen(url) as resp, dest.open("wb") as out:
+    with (
+        urllib.request.urlopen(url, timeout=DOWNLOAD_TIMEOUT_S) as resp,
+        dest.open("wb") as out,
+    ):
         while chunk := resp.read(1 << 16):
             sha.update(chunk)
             out.write(chunk)
@@ -77,8 +79,8 @@ def download_and_verify(url: str, expected_sha: str, dest: Path) -> None:
         )
 
 
-def ensure_typst() -> Path:
-    typst_bin = BIN_ROOT / "typst"
+def ensure_typst(bin_root: Path) -> Path:
+    typst_bin = bin_root / "typst"
     if typst_bin.exists():
         return typst_bin
 
@@ -87,9 +89,9 @@ def ensure_typst() -> Path:
         f"https://github.com/typst/typst/releases/download/"
         f"v{TYPST_VERSION}/{archive_name}"
     )
-    archive_path = BIN_ROOT / archive_name
+    archive_path = bin_root / archive_name
 
-    print(f"installing typst {TYPST_VERSION} into {BIN_ROOT}", file=sys.stderr)
+    print(f"installing typst {TYPST_VERSION} into {bin_root}", file=sys.stderr)
     download_and_verify(url, expected_sha, archive_path)
 
     with tarfile.open(archive_path, "r:xz") as tf:
@@ -98,7 +100,7 @@ def ensure_typst() -> Path:
             name = Path(member.name).name
             if name == "typst" and member.isfile():
                 member.name = "typst"
-                tf.extract(member, BIN_ROOT, filter="data")
+                tf.extract(member, bin_root, filter="data")
                 break
         else:
             sys.exit(f"no typst binary inside {archive_name}")
@@ -109,7 +111,9 @@ def ensure_typst() -> Path:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser = argparse.ArgumentParser(
+        description="Build cards.pdf from cards.typ using a pinned Typst binary."
+    )
     parser.add_argument(
         "--font",
         help=(
@@ -124,12 +128,15 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    slugs = sorted(p.stem for p in (REPO_ROOT / "src").glob("*.py"))
+    repo_root = find_repo_root()
+    bin_root = repo_root / ".bin" / f"typst-{TYPST_VERSION}"
+
+    slugs = sorted(p.stem for p in (repo_root / "src").glob("*.py"))
     if not slugs:
         sys.exit("no algorithms found in src/*.py")
 
-    typst = ensure_typst()
-    out = REPO_ROOT / "cards.pdf"
+    typst = ensure_typst(bin_root)
+    out = repo_root / "cards.pdf"
     cmd = [
         str(typst),
         "compile",
@@ -145,8 +152,8 @@ def main() -> int:
     if args.font_path:
         cmd += ["--font-path", args.font_path]
     print(f"$ {' '.join(cmd)}", file=sys.stderr)
-    raise SystemExit(subprocess.call(cmd, cwd=REPO_ROOT))
+    return subprocess.call(cmd, cwd=repo_root)
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
