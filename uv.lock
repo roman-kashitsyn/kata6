@@ -107,7 +107,7 @@ wheels = [
 [[package]]
 name = "kata6"
 version = "0"
-source = { virtual = "." }
+source = { editable = "." }
 
 [package.dev-dependencies]
 dev = [

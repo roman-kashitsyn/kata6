@@ -2,6 +2,24 @@
 
 A collection of algorithms and data structures short enough to fit on an A6 index card (105×148mm).
 
+## Building the cards
+
+Render every algorithm in `src/*` into `cards.pdf` (one A6 landscape page each):
+
+```
+uv run build-cards
+```
+
+The script uses [typst](https://github.com/typst/typst) to render the PDF.
+On the first run, it fetches the pinned binary and caches it in `.bin/`.
+
+The default font is the Typst-embedded **DejaVu Sans Mono**.
+You can override it with the `--font` option.
+
+```
+uv run build-cards --font "JetBrains Mono"
+```
+
 ## Implemented algorithms
 
 - [x] [Dijkjstra’s shortest path](src/dijkstra.py)
@@ -25,8 +43,7 @@ Check style with `uv run ruff check` (add `--fix` to auto-fix).
 ## Naming conventions
 
 Variable names are terse for brevity.
-Function signatures are untyped,
-but the code follows common conventions:
+Function signatures are untyped, but the code follows common conventions:
 - `u` and `v` are vertices of `type Vertex = int`.
    Edges always go from `u` to `v`.
 - `s` is a source vertex of type `int`.
