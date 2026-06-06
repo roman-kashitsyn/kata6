@@ -1,10 +1,11 @@
 import unittest
+
 from floydwarshall import floydwarshall
+
 
 class TestFloydWarshall(unittest.TestCase):
     def test_wiki(self):
         """Tests the example from the Wikipedia: https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm#Example"""
-        inf = float('inf')
         self.assertEqual(
             floydwarshall([[(0, 0), (2, -2)],
                            [(0, 4), (1, 0), (2, 3)],

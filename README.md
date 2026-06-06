@@ -1,26 +1,31 @@
-# Algorithm Flashcards
+# Algorithm Katas
 
-This repository is a collection of algorithms and data structures implemented in Python 3.
-Each algorithm implementation is short enough to fit into an A6 index card (105×148mm).
+A collection of algorithms and data structures short enough to fit on an A6 index card (105×148mm).
 
 ## Implemented algorithms
 
-- [x] [Dijkjstra’s shortest path](dijkstra.py)
-- [x] [Bellman-Ford shortest path](bellmanford.py)
-- [x] [Floyd-Warshall all-pairs shortest path](floydwarshall.py)
-- [x] [Union-Find disjoint set](unionfind.py)
+- [x] [Dijkjstra’s shortest path](src/dijkstra.py)
+- [x] [Bellman-Ford shortest path](src/bellmanford.py)
+- [x] [Floyd-Warshall all-pairs shortest path](src/floydwarshall.py)
+- [x] [Union-Find disjoint set](src/unionfind.py)
+
+## Layout
+
+- `src/` --- algorithm implementations
+- `tests/` --- unit tests (`pytest`)
+
+Requires Python 3.12+ and [uv](https://docs.astral.sh/uv/).
+Run the test suite with `uv run pytest`.
 
 ## Naming conventions
 
-For the sake of brevity, the variable names are terse, and there is no typing information in the function signatures.
-Variable types:
+Variable names are terse for brevity.
+Function signatures are untyped,
+but the code follows common conventions:
 - `u` and `v` are vertices of `type Vertex = int`.
    Edges always go from `u` to `v`.
 - `s` is a source vertex of type `int`.
 - `e` is an edge of type `tuple[Vertex, Vertex, Weight]`.
-- `es` is an array of edges.
-- `nv` is the number of vertices in the graph (`int`).
-  All algorithms assume that the vertices are numbered from `0` to `nv-1`.
 - `w` is a weight of some numeric type (`int` or `float`).
 - `g` is an adjacency list representation of a graph, of type `list[list[tuple[Vertex, Weight]]]`.
 - `d` is a distance array or matrix (depending on the algorithm), of type `list[Weight]` or `list[list[Weight]]`.

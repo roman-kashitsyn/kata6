@@ -1,5 +1,7 @@
 import unittest
+
 from unionfind import UnionFind
+
 
 class UnionFindTest(unittest.TestCase):
     def test_unionfind(self):
