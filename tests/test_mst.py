@@ -34,6 +34,18 @@ CASES = [
         [(0, 1, 3), (2, 3, 4)],
         id="disconnected_forest",
     ),
+    # Vertex 0 lists its heavy edge 0-1 (w=10) before the light
+    # edge 0-2 (w=1). If Prim forgets to heapify the initial pq,
+    # heappop returns pq[0] = (10, 0, 1) and the MST is wrong.
+    pytest.param(
+        [
+            [(1, 10), (2, 1)],
+            [(0, 10), (2, 5)],
+            [(0, 1), (1, 5)],
+        ],
+        [(0, 2, 1), (1, 2, 5)],
+        id="unordered_adjacency",
+    ),
 ]
 
 
