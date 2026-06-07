@@ -18,7 +18,7 @@ sources = ["scripts"]
 dev = ["pytest", "pytest-cov", "ruff"]
 
 [tool.pytest.ini_options]
-pythonpath = ["src"]
+pythonpath = ["src", "tests"]
 testpaths = ["tests", "src"]
 addopts = "--doctest-modules"
 
