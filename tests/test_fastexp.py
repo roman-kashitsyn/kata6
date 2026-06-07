@@ -18,7 +18,7 @@ CASES = [
 ]
 
 
-@pytest.mark.parametrize("x,n,expected", CASES)
+@pytest.mark.parametrize("x, n, expected", CASES)
 def test_fastexp(x, n, expected):
     assert fastexp(x, n) == expected
 
@@ -29,15 +29,8 @@ def test_matches_builtin(x, n):
     assert fastexp(x, n) == x**n
 
 
-def test_does_not_mutate_via_aliasing():
-    # x and n are ints (immutable), but guard against future
-    # refactors that might accidentally rebind the caller's args.
-    x, n = 5, 6
-    fastexp(x, n)
-    assert (x, n) == (5, 6)
-
-
-def test_negative_exponent_returns_one():
-    # Current behavior: the while-loop guard skips negative n.
-    # Pinning this so a future change is a deliberate choice.
-    assert fastexp(2, -3) == 1
+def test_negative_exponent_raises():
+    with pytest.raises(
+        ValueError, match="n must be non-negative"
+    ):
+        fastexp(2, -3)
