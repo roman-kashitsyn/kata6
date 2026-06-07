@@ -2,13 +2,13 @@ class UnionFind:
     def __init__(self, n: int):
         self.p, self.r = list(range(n)), n * [0]
 
-    def find(self, x: int) -> int:
+    def find(self, x):
         while self.p[x] != x:
             self.p[x] = self.p[self.p[x]]
             x = self.p[x]
         return x
 
-    def union(self, x: int, y: int) -> bool:
+    def union(self, x, y):
         x, y = self.find(x), self.find(y)
         if x == y:
             return False
