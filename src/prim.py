@@ -1,5 +1,5 @@
 def prim(g):
-    from heapq import heappop, heappush
+    from heapq import heapify, heappop, heappush
 
     seen, mst = [False] * len(g), []
     for s in range(len(g)):
@@ -7,6 +7,7 @@ def prim(g):
             continue
         seen[s] = True
         pq = [(w, s, v) for v, w in g[s]]
+        heapify(pq)
         while pq:
             w, u, v = heappop(pq)
             if seen[v]:

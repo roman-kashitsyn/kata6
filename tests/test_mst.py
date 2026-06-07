@@ -42,4 +42,4 @@ CASES = [
     "algo", [kruskal, prim], ids=["kruskal", "prim"]
 )
 def test_mst(algo, graph, expected):
-    assert canon(algo(graph)) == expected
+    assert canon(algo(graph)) == canon(expected)
