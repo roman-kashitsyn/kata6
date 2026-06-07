@@ -1,16 +1,16 @@
 def toposort(g):
     r, state = [], ["w"] * len(g)
 
-    def dfs(s):
-        if state[s] == "b":
+    def dfs(u):
+        if state[u] == "b":
             return
-        if state[s] == "g":
+        if state[u] == "g":
             raise ValueError("cycle")
-        state[s] = "g"
-        for u in g[s]:
-            dfs(u)
-        state[s] = "b"
-        r.append(s)
+        state[u] = "g"
+        for v in g[u]:
+            dfs(v)
+        state[u] = "b"
+        r.append(u)
 
     for s in range(len(g)):
         dfs(s)

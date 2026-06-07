@@ -25,31 +25,36 @@ uv run build-cards --font "JetBrains Mono"
 - [x] [Topological sort](src/toposort.py)
 - [ ] Kahn's topological sort
 - [x] [Dijkstra’s shortest path](src/dijkstra.py)
+- [ ] A* search
 - [x] [Bellman-Ford shortest path](src/bellmanford.py)
 - [x] [Floyd-Warshall all-pairs shortest path](src/floydwarshall.py)
-- [x] [Union-Find disjoint set](src/unionfind.py)
 - [x] [Prim's spanning tree](src/prim.py)
 - [x] [Kruskal's spanning tree](src/kruskal.py)
 - [ ] Tarjan's strongly-connected components
 - [ ] Kuhn's bipartite matching
 - [ ] Edmonds-Karp max flow
+- [x] [Union-Find disjoint set](src/unionfind.py)
 - [ ] Fenwick tree
+- [ ] Segment tree
+- [ ] Binary heap
 - [ ] Knuth-Morris-Pratt search
+- [ ] Aho-Corasick
 - [ ] Rabin-Karp search
-- [ ] Edit distance
+- [ ] Levenshtein distance
 - [ ] Meyers diff
 - [ ] Burrows-Wheeler transform
 - [ ] Suffix array construction
 - [ ] Graham's convex hull
 - [ ] Point in polygon (ray casting)
-- [ ] Miller-Rabin primality test
-- [ ] Reservoir sampling
 - [ ] Quick select
 - [ ] Huffman code
+- [ ] Reservoir sampling
+- [ ] Miller-Rabin primality test
+- [ ] Karatsuba's multiplication
 - [x] [Fast exponentiation](src/fastexp.py)
+- [ ] Cooley–Tukey FFT
 - [ ] Boyer-Moore majority vote
 - [ ] Floyd's cycle finding
-- [ ] Cooley–Tukey FFT
 
 ## Layout
 
