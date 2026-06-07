@@ -22,10 +22,33 @@ uv run build-cards --font "JetBrains Mono"
 
 ## Implemented algorithms
 
-- [x] [Dijkjstra’s shortest path](src/dijkstra.py)
+- [ ] Topological sort
+- [x] [Dijkstra’s shortest path](src/dijkstra.py)
 - [x] [Bellman-Ford shortest path](src/bellmanford.py)
 - [x] [Floyd-Warshall all-pairs shortest path](src/floydwarshall.py)
 - [x] [Union-Find disjoint set](src/unionfind.py)
+- [ ] Prim's spanning tree
+- [x] [Kruskal's spanning tree](src/kruskal.py)
+- [ ] Tarjan's strongly-connected components
+- [ ] Kuhn's bipartite matching
+- [ ] Edmonds-Karp max flow
+- [ ] Fenwick tree
+- [ ] Knuth-Morris-Pratt search
+- [ ] Rabin-Karp search
+- [ ] Edit distance
+- [ ] Meyers diff
+- [ ] Burrows-Wheeler transform
+- [ ] Suffix array construction
+- [ ] Graham's convex hull
+- [ ] Point in polygon (ray casting)
+- [ ] Miller-Rabin primality test
+- [ ] Reservoir sampling
+- [ ] Quick select
+- [ ] Huffman code
+- [ ] Fast exponentiation
+- [ ] Boyer-Moore majority vote
+- [ ] Floyd's cycle finding
+- [ ] Cooley–Tukey FFT
 
 ## Layout
 

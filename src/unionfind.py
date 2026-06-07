@@ -1,5 +1,5 @@
 class UnionFind:
-    def __init__(self, n):
+    def __init__(self, n: int):
         self.p, self.r = list(range(n)), n * [0]
 
     def find(self, x):
@@ -11,9 +11,10 @@ class UnionFind:
     def union(self, x, y):
         x, y = self.find(x), self.find(y)
         if x == y:
-            return
+            return False
         if self.r[x] < self.r[y]:
             x, y = y, x
         self.p[y] = x
         if self.r[x] == self.r[y]:
             self.r[x] += 1
+        return True

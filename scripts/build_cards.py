@@ -45,10 +45,17 @@ DOWNLOAD_TIMEOUT_S = 60
 
 
 def find_repo_root() -> Path:
-    for p in [Path.cwd().resolve(), *Path.cwd().resolve().parents]:
-        if (p / "cards.typ").exists() and (p / "src").is_dir():
+    for p in [
+        Path.cwd().resolve(),
+        *Path.cwd().resolve().parents,
+    ]:
+        if (p / "cards.typ").exists() and (
+            p / "src"
+        ).is_dir():
             return p
-    sys.exit("could not find cards.typ and src/ — run from the kata6 repo")
+    sys.exit(
+        "could not find cards.typ and src/ — run from the kata6 repo"
+    )
 
 
 def asset_for_host() -> tuple[str, str]:
@@ -60,12 +67,16 @@ def asset_for_host() -> tuple[str, str]:
     return TYPST_ASSETS[key]
 
 
-def download_and_verify(url: str, expected_sha: str, dest: Path) -> None:
+def download_and_verify(
+    url: str, expected_sha: str, dest: Path
+) -> None:
     print(f"  fetching {url}", file=sys.stderr)
     dest.parent.mkdir(parents=True, exist_ok=True)
     sha = hashlib.sha256()
     with (
-        urllib.request.urlopen(url, timeout=DOWNLOAD_TIMEOUT_S) as resp,
+        urllib.request.urlopen(
+            url, timeout=DOWNLOAD_TIMEOUT_S
+        ) as resp,
         dest.open("wb") as out,
     ):
         while chunk := resp.read(1 << 16):
@@ -91,7 +102,10 @@ def ensure_typst(bin_root: Path) -> Path:
     )
     archive_path = bin_root / archive_name
 
-    print(f"installing typst {TYPST_VERSION} into {bin_root}", file=sys.stderr)
+    print(
+        f"installing typst {TYPST_VERSION} into {bin_root}",
+        file=sys.stderr,
+    )
     download_and_verify(url, expected_sha, archive_path)
 
     with tarfile.open(archive_path, "r:xz") as tf:
@@ -103,7 +117,9 @@ def ensure_typst(bin_root: Path) -> Path:
                 tf.extract(member, bin_root, filter="data")
                 break
         else:
-            sys.exit(f"no typst binary inside {archive_name}")
+            sys.exit(
+                f"no typst binary inside {archive_name}"
+            )
 
     typst_bin.chmod(0o755)
     archive_path.unlink()
@@ -131,7 +147,9 @@ def main() -> int:
     repo_root = find_repo_root()
     bin_root = repo_root / ".bin" / f"typst-{TYPST_VERSION}"
 
-    slugs = sorted(p.stem for p in (repo_root / "src").glob("*.py"))
+    slugs = sorted(
+        p.stem for p in (repo_root / "src").glob("*.py")
+    )
     if not slugs:
         sys.exit("no algorithms found in src/*.py")
 
@@ -142,8 +160,10 @@ def main() -> int:
         "compile",
         "cards.typ",
         str(out),
-        "--root", ".",
-        "--input", f"slugs={','.join(slugs)}",
+        "--root",
+        ".",
+        "--input",
+        f"slugs={','.join(slugs)}",
     ]
     if args.font:
         cmd += ["--input", f"font={args.font}"]
