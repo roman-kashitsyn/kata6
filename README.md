@@ -22,7 +22,8 @@ uv run build-cards --font "JetBrains Mono"
 
 ## Implemented algorithms
 
-- [ ] Topological sort
+- [x] [Topological sort](src/toposort.py)
+- [ ] Kahn's topological sort
 - [x] [Dijkstra’s shortest path](src/dijkstra.py)
 - [x] [Bellman-Ford shortest path](src/bellmanford.py)
 - [x] [Floyd-Warshall all-pairs shortest path](src/floydwarshall.py)
