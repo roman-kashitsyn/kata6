@@ -1,7 +1,6 @@
-from unionfind import UnionFind
-
-
 def kruskal(g):
+    from unionfind import UnionFind
+
     edges = [
         (w, u, v)
         for (u, adj) in enumerate(g)

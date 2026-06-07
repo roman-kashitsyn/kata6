@@ -27,7 +27,7 @@ uv run build-cards --font "JetBrains Mono"
 - [x] [Bellman-Ford shortest path](src/bellmanford.py)
 - [x] [Floyd-Warshall all-pairs shortest path](src/floydwarshall.py)
 - [x] [Union-Find disjoint set](src/unionfind.py)
-- [ ] Prim's spanning tree
+- [x] [Prim's spanning tree](src/prim.py)
 - [x] [Kruskal's spanning tree](src/kruskal.py)
 - [ ] Tarjan's strongly-connected components
 - [ ] Kuhn's bipartite matching

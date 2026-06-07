@@ -1,7 +1,6 @@
-from heapq import heappop, heappush
-
-
 def dijkstra(g, s):
+    from heapq import heappop, heappush
+
     d = [float("inf")] * len(g)
     p = [None] * len(g)
     d[s] = 0
