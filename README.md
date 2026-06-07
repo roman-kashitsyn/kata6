@@ -45,7 +45,7 @@ uv run build-cards --font "JetBrains Mono"
 - [ ] Reservoir sampling
 - [ ] Quick select
 - [ ] Huffman code
-- [ ] Fast exponentiation
+- [x] [Fast exponentiation](src/fastexp.py)
 - [ ] Boyer-Moore majority vote
 - [ ] Floyd's cycle finding
 - [ ] Cooley–Tukey FFT
